@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-app
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app-secret-sa
+  namespace: demo-app
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret-sa-token
+  namespace: demo-app
+  annotations:
+    kubernetes.io/service-account.name: app-secret-sa
+type: kubernetes.io/service-account-token
